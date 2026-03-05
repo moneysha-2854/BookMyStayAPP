@@ -1,44 +1,64 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Abstract representation of a hotel room.
- * This class defines common attributes shared by all room types.
+ * RoomInventory manages centralized availability of rooms
+ * using a HashMap data structure.
  *
- * @author manisha the great developer
- * @version 2.0
+ * This class ensures that all room availability information
+ * is stored and accessed from a single source of truth.
+ *
+ * @manisha
+ *
+ * @version 3.0
  */
-public abstract class BookMyStayApp {
+public class BookMyStayApp {
 
-    private String roomType;
-    private int numberOfBeds;
-    private int roomSize;
-    private double pricePerNight;
+    // HashMap to store room type and availability
+    private Map<String, Integer> inventory;
 
-    public BookMyStayApp(String roomType, int numberOfBeds, int roomSize, double pricePerNight) {
-        this.roomType = roomType;
-        this.numberOfBeds = numberOfBeds;
-        this.roomSize = roomSize;
-        this.pricePerNight = pricePerNight;
+    /**
+     * Constructor initializes the room inventory
+     * with predefined room types and availability.
+     */
+    public BookMyStayApp() {
+        inventory = new HashMap<>();
+
+        // Register room types with initial availability
+        inventory.put("Single Room", 5);
+        inventory.put("Double Room", 3);
+        inventory.put("Suite Room", 2);
     }
 
-    public String getRoomType() {
-        return roomType;
+    /**
+     * Returns the availability of a given room type
+     */
+    public int getAvailability(String roomType) {
+        return inventory.getOrDefault(roomType, 0);
     }
 
-    public int getNumberOfBeds() {
-        return numberOfBeds;
+    /**
+     * Updates the availability for a given room type
+     */
+    public void updateAvailability(String roomType, int newCount) {
+        if (inventory.containsKey(roomType)) {
+            inventory.put(roomType, newCount);
+        } else {
+            System.out.println("Room type not found in inventory.");
+        }
     }
 
-    public int getRoomSize() {
-        return roomSize;
-    }
+    /**
+     * Displays the entire inventory
+     */
+    public void displayInventory() {
+        System.out.println("Current Room Inventory:");
+        System.out.println("---------------------------");
 
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
+        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue() + " rooms available");
+        }
 
-    public void displayRoomDetails() {
-        System.out.println("Room Type: " + roomType);
-        System.out.println("Beds: " + numberOfBeds);
-        System.out.println("Room Size: " + roomSize + " sq ft");
-        System.out.println("Price per Night: $" + pricePerNight);
+        System.out.println("---------------------------");
     }
 }
