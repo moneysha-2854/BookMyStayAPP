@@ -1,27 +1,44 @@
 /**
- * Book My Stay - Hotel Booking Management System
+ * Abstract representation of a hotel room.
+ * This class defines common attributes shared by all room types.
  *
- * <p>This class represents the entry point of the Hotel Booking application.
- * It demonstrates how a Java program begins execution using the main() method
- * and prints a welcome message to the console.</p>
- *
- * <p>The purpose of this use case is to establish a predictable starting point
- * for the application and illustrate fundamental Java concepts such as
- * class structure, static methods, console output, and program flow.</p>
- *
- * @MANISHA THE GREAT DEVELOPER
- * @version 1.0
+ * @author manisha the great developer
+ * @version 2.0
  */
-public class BookMyStayApp {
-    public static void main(String[] args) {
+public abstract class BookMyStayApp {
 
-        // Display welcome message
-        System.out.println("===================================");
-        System.out.println("     Welcome to Book My Stay");
-        System.out.println("   Hotel Booking Management App");
+    private String roomType;
+    private int numberOfBeds;
+    private int roomSize;
+    private double pricePerNight;
 
-        System.out.println("===================================");
-        System.out.println("Application started successfully.");
-        System.out.println("Thank you for using Book My Stay!");
+    public BookMyStayApp(String roomType, int numberOfBeds, int roomSize, double pricePerNight) {
+        this.roomType = roomType;
+        this.numberOfBeds = numberOfBeds;
+        this.roomSize = roomSize;
+        this.pricePerNight = pricePerNight;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    public int getRoomSize() {
+        return roomSize;
+    }
+
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public void displayRoomDetails() {
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Beds: " + numberOfBeds);
+        System.out.println("Room Size: " + roomSize + " sq ft");
+        System.out.println("Price per Night: $" + pricePerNight);
     }
 }
